@@ -1,0 +1,24 @@
+{
+  "name": "backendapp",
+  "version": "1.0.0",
+  "description": "api for civil certificate app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "civil-certicte-status-app"
+  },
+  "author": "Mickael",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "postgresql": "^0.0.1",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
