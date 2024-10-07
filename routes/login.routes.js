@@ -8,6 +8,7 @@ const private_key = require("../auth/private_key")
 module.exports = (app) => {
   app.post("/api/login", (req, res) => {
     User.findOne({ where: { email: req.body.email } })
+
       .then((user) => {
         console.log(user.email);
 
@@ -20,7 +21,7 @@ module.exports = (app) => {
 
               if (!isValidPassWord)
                 return res.status(200).json({ message: "invalid password" });
-              const token = jwt.sign({ id: user.id }, private_key, {
+              const token = jwt.sign({ userId: user.id }, private_key, {
                 expiresIn: "24h",
               });
               return res
@@ -30,7 +31,7 @@ module.exports = (app) => {
         }
       })
       .catch((err) =>
-        res.status(500).json({ message: "error server in login", error })
+        res.status(500).json({ message: "error server in login",error: err.message})
       );
   });
 };

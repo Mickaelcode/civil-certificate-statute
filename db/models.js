@@ -35,4 +35,49 @@ const User = sequelize.define(
   }
 );
 
-module.exports = User;
+const Citizen = sequelize.define(
+  "Citizen",
+  {
+    copyNumber: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: false,
+      allowNull: false,
+      unique: { msg: "copy number already exists" },
+    },
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    dateOfBirth: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      validate: {
+        isDate: { msg: "Format date  is not valid" },
+      },
+    },
+    cin: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      unique: { msg: "cin already exists" },
+      validate: {
+        isNumeric: { msg: "cin must be a number" },
+      },
+    },
+  },
+  {
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false,
+  }
+);
+
+User.hasOne(Citizen, { foreignKey: 'copyNumber' });
+Citizen.belongsTo(User, { foreignKey: 'id' });
+
+module.exports = {User, Citizen}

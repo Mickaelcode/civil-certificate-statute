@@ -1,10 +1,7 @@
-const User = require("../db/models"); // Assuming the correct path to your model
+const {User , Citizen} = require("../db/models"); // Assuming the correct path to your model
 const { ValidationError } = require("sequelize");
 const bcrypt = require("bcrypt");
 const auth = require("../auth/auth");
-
-const jwt = require('jsonwebtoken')
-const private_key = require('../auth/private_key')
 
 /**
  * Create user route
@@ -104,4 +101,5 @@ const deleteUser = (app) => {
       });
   });
 };
+
 module.exports = { createUser, readUserInfo, updateUser, deleteUser };

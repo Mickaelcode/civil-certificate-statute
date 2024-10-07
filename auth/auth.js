@@ -16,6 +16,13 @@ module.exports = (req, res, next) => {
       const message = `L'utilisateur n'est pas autorisé à accèder à cette ressource.`;
       return res.status(401).json({ message, data: error });
     }
+    const userId = decodedToken.userId;
+    console.log(req.body.userId);
+    
+    if (req.body.userId && req.body.userId !== userId) {
+      const message = `L'identification n'est pas autoriser à accèder à cette ressource.`;
+      return res.status(401).json({ message });
+    }
     next();
   });
 };
